@@ -1,3 +1,4 @@
+const ARROW_ICON = '<svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 19 19 5M8 5h11v11"/></svg>';
 const WHATSAPP = '5564992953761';
 const INSTAGRAM = 'https://www.instagram.com/loja.rz.maquiagens';
 
@@ -43,7 +44,7 @@ function renderProducts(){
   let visible=products.filter(product=>(category==='todos'||product.category===category) && (!query || `${product.name} ${product.brand} ${product.category}`.toLocaleLowerCase('pt-BR').includes(query)));
   if($('#sort-products').value==='name') visible=[...visible].sort((a,b)=>a.name.localeCompare(b.name,'pt-BR'));
   $('#empty-results').hidden=visible.length>0;
-  $('#product-grid').innerHTML=visible.map(product=>`<article class="product-card"><div class="product-media"><img src="/assets/${product.image}" alt="${safe(product.name)}" loading="lazy"><span class="product-tag">${product.tag}</span><button class="quick-add" data-add="${product.id}" aria-label="Adicionar ${safe(product.name)} à sacolinha">+</button></div><div class="product-info"><small>${safe(product.brand)} · ${safe(product.category)}</small><h3>${safe(product.name)}</h3><p>${safe(product.description)}</p><div class="product-bottom"><span>Valor sob consulta</span><button data-add="${product.id}">Adicionar à sacola ↗</button></div><a class="source-link" href="${product.source}" target="_blank" rel="noopener noreferrer">Ver publicação ↗</a></div></article>`).join('');
+  $('#product-grid').innerHTML=visible.map(product=>`<article class="product-card"><div class="product-media"><img src="/assets/${product.image}" alt="${safe(product.name)}" loading="lazy"><span class="product-tag">${product.tag}</span><button class="quick-add" data-add="${product.id}" aria-label="Adicionar ${safe(product.name)} à sacolinha">+</button></div><div class="product-info"><small>${safe(product.brand)} · ${safe(product.category)}</small><h3>${safe(product.name)}</h3><p>${safe(product.description)}</p><div class="product-bottom"><span>Valor sob consulta</span><button data-add="${product.id}">Adicionar à sacola ${ARROW_ICON}</button></div><a class="source-link" href="${product.source}" target="_blank" rel="noopener noreferrer">Ver publicação ${ARROW_ICON}</a></div></article>`).join('');
 }
 function openCart(){ $('#bag-drawer').classList.add('open'); $('#bag-drawer').setAttribute('aria-hidden','false'); $('#drawer-overlay').hidden=false; document.body.style.overflow='hidden'; $('#bag-close').focus(); }
 function closeCart(){ $('#bag-drawer').classList.remove('open'); $('#bag-drawer').setAttribute('aria-hidden','true'); $('#drawer-overlay').hidden=true; document.body.style.overflow=''; $('#bag-toggle').focus(); }
